@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\FasilitasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OfficerController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\SopController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -26,42 +32,28 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
         return view('admin.dashboard.index');
     });
     Route::resource('/admin/user', UserController::class);
-    Route::post('users', [UserController::class, 'store']);
+    Route::resource('/admin/officer', OfficerController::class);
+    Route::resource('/admin/area', AreaController::class);
+    Route::resource('/admin/fasilitas', FasilitasController::class);
+    Route::resource('/admin/schedules', ScheduleController::class);
+    Route::get('/admin/dashboard/rooms/{rooms:type}', [RoomController::class, 'index']);
+    Route::post('/admin/dashboard/rooms', [RoomController::class, 'store'])->name('store');
+    Route::post('/admin/dashboard/rooms/{id}/edit', [RoomController::class, 'edit'])->name('edit');
+    Route::post('/admin/dashboard/rooms/update', [RoomController::class, 'update'])->name('update');
+    Route::delete('/admin/dashboard/rooms/{id}', [RoomController::class, 'destroy'])->name('destroy');
+    // Route::post('/admin/officer', [OfficerController::class, 'store'])->name('store');
 });
 
-Route::group(['middleware' => ['auth', 'role:pimpinan']], function () {
-    Route::get('/pimpinan/dashboard', function () {
-        return view('pimpinan.dashboard.index');
+Route::group(['middleware' => ['auth', 'role:dosen']], function () {
+    Route::get('/dosen/dashboard', function () {
+        return view('dosen.dashboard.index');
     });
 });
 
-Route::get('/admin/sop', function () {
-    return view('admin.sop.index');
-});
 Route::get('/admin/sop/schedule', function () {
     return view('admin.sop.schedule.index');
 });
-Route::get('/admin/schedules', function () {
-    return view('admin.schedules.index');
-});
-Route::get('/admin/rooms', function () {
-    return view('admin.rooms.index');
-});
-Route::get('/admin/dashboard/rooms/staff', function () {
-    return view('admin.dashboard.rooms.staff.index');
-});
-Route::get('/admin/dashboard/rooms/class', function () {
-    return view('admin.dashboard.rooms.class.index');
-});
-Route::get('/admin/dashboard/rooms/pimpinan', function () {
-    return view('admin.dashboard.rooms.pimpinan.index');
-});
-Route::get('/admin/dashboard/rooms/lab', function () {
-    return view('admin.dashboard.rooms.lab.index');
-});
-Route::get('/admin/dashboard/rooms/etc', function () {
-    return view('admin.dashboard.rooms.etc.index');
-});
+
 Route::get('/admin/profile', function () {
     return view('admin.profile.index');
 });
@@ -71,39 +63,24 @@ Route::get('/admin/report', function () {
 Route::get('/admin/report/main', function () {
     return view('admin.report.main.index');
 });
-Route::get('/pimpinan/dashboard', function () {
-    return view('pimpinan.dashboard.index');
+Route::get('/dosen/dashboard', function () {
+    return view('dosen.dashboard.index');
 });
-Route::get('/pimpinan/dashboard/rooms/staff', function () {
-    return view('pimpinan.dashboard.rooms.staff.index');
+Route::get('/dosen/sop', function () {
+    return view('dosen.sop.index');
 });
-Route::get('/pimpinan/dashboard/rooms/class', function () {
-    return view('pimpinan.dashboard.rooms.class.index');
+Route::get('/dosen/sop/schedule', function () {
+    return view('dosen.sop.schedule.index');
 });
-Route::get('/pimpinan/dashboard/rooms/pimpinan', function () {
-    return view('pimpinan.dashboard.rooms.pimpinan.index');
+Route::get('/dosen/schedules', function () {
+    return view('dosen.schedules.index');
 });
-Route::get('/pimpinan/dashboard/rooms/lab', function () {
-    return view('pimpinan.dashboard.rooms.lab.index');
+Route::get('/dosen/report', function () {
+    return view('dosen.report.index');
 });
-Route::get('/pimpinan/dashboard/rooms/etc', function () {
-    return view('pimpinan.dashboard.rooms.etc.index');
+Route::get('/dosen/report/main', function () {
+    return view('dosen.report.main.index');
 });
-Route::get('/pimpinan/sop', function () {
-    return view('pimpinan.sop.index');
-});
-Route::get('/pimpinan/sop/schedule', function () {
-    return view('pimpinan.sop.schedule.index');
-});
-Route::get('/pimpinan/schedules', function () {
-    return view('pimpinan.schedules.index');
-});
-Route::get('/pimpinan/report', function () {
-    return view('pimpinan.report.index');
-});
-Route::get('/pimpinan/report/main', function () {
-    return view('pimpinan.report.main.index');
-});
-Route::get('/pimpinan/profile', function () {
-    return view('pimpinan.profile.index');
+Route::get('/dosen/profile', function () {
+    return view('dosen.profile.index');
 });

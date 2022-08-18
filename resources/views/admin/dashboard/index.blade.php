@@ -29,7 +29,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <a class="text-xs font-weight-bold text-primary mb-1" style="text-decoration: none"
-                                    href="/admin/dashboard/rooms/class">
+                                    href="/admin/dashboard/rooms/kelas">
                                     RUANG KELAS</a>
                                 <hr>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">4 Unit</div>
@@ -47,7 +47,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <a class="text-xs font-weight-bold text-primary mb-1" style="text-decoration: none"
-                                    href="/admin/dashboard/rooms/manager">
+                                    href="/admin/dashboard/rooms/lecturer">
                                     RUANG DOSEN</a>
                                 <hr>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">4 Unit</div>

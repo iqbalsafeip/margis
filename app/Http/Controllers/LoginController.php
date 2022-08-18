@@ -20,8 +20,8 @@ class LoginController extends Controller
             switch ($role) {
                 case "admin":
                     return redirect()->intended('/admin/dashboard')->with('toast_success', 'Anda Berhasil Login');
-                case "pimpinan":
-                    return redirect()->intended('/pimpinan/dashboard')->with('toast_success', 'Anda Berhasil Login');
+                case "dosen":
+                    return redirect()->intended('/dosen/dashboard')->with('toast_success', 'Anda Berhasil Login');
             }
         } else {
             return back()->with('toast_error', 'Anda Gagal Login!');
@@ -30,8 +30,6 @@ class LoginController extends Controller
     public function logout()
     {
         Auth::logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
         return redirect('/');
     }
 }

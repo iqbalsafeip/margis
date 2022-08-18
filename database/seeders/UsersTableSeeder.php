@@ -22,10 +22,22 @@ class UsersTableSeeder extends Seeder
 
         ]);
         User::create([
-            'username' => 'pimpinan',
-            'email' => 'pimpinan@gmail.com',
-            'password' => bcrypt('pimpinan'),
-            'role' => 'pimpinan',
+            'username' => 'dosen1',
+            'email' => 'dosen1@gmail.com',
+            'password' => bcrypt('password'),
+            'role' => 'dosen',
+        ]);
+        User::create([
+            'username' => 'dosen2',
+            'email' => 'dosen2@gmail.com',
+            'password' => bcrypt('password'),
+            'role' => 'dosen',
+        ]);
+        User::create([
+            'username' => 'dosen3',
+            'email' => 'dosen3@gmail.com',
+            'password' => bcrypt('password'),
+            'role' => 'dosen',
         ]);
     }
 }
