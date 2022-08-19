@@ -1,42 +1,31 @@
 @extends('admin.layouts.main')
 @section('content')
     <div class="container-fluid px-4">
-        <h1 class="mt-4">SOP Kebersihan</h1>
+        <h1 class="mt-4">SOP Kebersihan ITG</h1>
         <hr>
         <button type="button" class="btn btn-primary btn-md mt-2 mb-3" data-bs-toggle="modal" data-bs-target="#addModal">
-            + Tambah Petugas Kebersihan
+            + Tambah SOP Kebersihan
         </button>
         <!-- Modal -->
         <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content" style="border-radius: 10px">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addModalLabel">Tambah Petugas Kebersihan</h5>
+                        <h5 class="modal-title" id="addModalLabel">Tambah SOP Kebersihan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form action="{{ route('sop.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="officer_name" name="'officer_name"
+                                <input type="text" class="form-control" id="nama_sop" name="nama_sop"
                                     placeholder="nama">
-                                <label for="officer_name">Nama Petugas</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="position" name="'position"
-                                    placeholder="position">
-                                <label for="position">Jabatan</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="no_hp" name="'no_hp"
-                                    placeholder="no_hp">
-                                <label for="no_hp">Nomor Handphone</label>
+                                <label for="nama_sop">Nama SOP</label>
                             </div>
                             <div class="form m-1">
-                                <label for="officer_photo">Upload Foto Petugas</label>
+                                <label for="file_sop">Upload File SOP disini</label>
                             </div>
-                            <input type="file" class="form-control" id="officer_photo" name="'officer_photo"
-                                accept="image">
+                            <input type="file" class="form-control" id="file_sop" name="file_sop">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
@@ -46,139 +35,74 @@
                 </div>
             </div>
         </div>
-        <table class="table table-bordered border-1 border-dark">
-            <thead class="text-center">
-                <th>nama</th>
-                <th>posisi</th>
-                <th>no hp</th>
-                <th>foto</th>
-            </thead>
-            <tbody>
-                @foreach ($sops as $sop)
-                    <tr>
-                        <td>{{ $sop->officer_name }}</td>
-                        <td>{{ $sop->position }}</td>
-                        <td>{{ $sop->no_hp }}</td>
-                        <td>
-                            <img src="{{ asset('storage/' . $sop->officer_photo) }}" class="img-fluid img-thumbnail"
-                                style="width: 180px; height: 160px; border-radius: 10px; object-fit: cover">
-
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-        {{-- @foreach ($sops as $sop)
-            <div class="row">
-                <div class="row d-flex justify-content-lg-start align-items-center h-100">
-                    <div class="col col-md-9 col-lg-7 col-xl-5">
-                        <div class="card shadow" style="border-radius: 5px;">
-                            <div class="card-body p-4">
-                                <div class="d-flex text-black">
-                                    <div class="flex-shrink-0">
-                                        <img src="{{ asset('storage/' . $sop->officer_photo) }}"
-                                            class="img-fluid img-thumbnail"
-                                            style="width: 180px; height: 160px; border-radius: 10px; object-fit: cover">
-                                    </div>
-                                    <div class="flex-grow-1 ms-3">
-                                        <h5 class="mb-1">{{ $sop->officer_name }}<a
-                                                href="{{ route('sop.edit', $sop->id) }}" class="btn btn-md"
-                                                data-bs-toggle="modal" data-bs-target="#editModal{{ $sop['id'] }}">
-                                                <i style="color: rgb(167, 167, 12)" class="fas fa-edit fa-sm  "></i>
-                                            </a>
-                                            <div class="modal fade" id="editModal{{ $sop['id'] }}" tabindex="-1"
-                                                aria-labelledby="editModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content" style="border-radius: 10px">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="editModalLabel">Edit Petugas
-                                                                Kebersihan
+        @if ($sops->count() > 0)
+            <div class="card-body col-md-auto p-2 table-responsive shadow">
+                <table id="table" class="table table-striped text-center">
+                    <thead class="table-dark">
+                        <th class="text-center">No</th>
+                        <th class="text-center">Nama Standar Operasional Prosedur</th>
+                        <th class="text-center">Tanggal Upload</th>
+                        <th class="text-center">File SOP</th>
+                        <th class="text-center">Hapus</th>
+                    </thead>
+                    <tbody>
+                        @php
+                            $no = 1;
+                        @endphp
+                        @foreach ($sops as $sop)
+                            <tr>
+                                <td><b>{{ $no++ }}</b></td>
+                                <td>{{ $sop->nama_sop }}</td>
+                                <td>{{ $sop->created_at->translatedFormat('d F, Y') }}</td>
+                                <td>
+                                    <a class=" badge bg-success mb-3" style="text-decoration: none" type="button"
+                                        target="_blank" href="{{ url('/storage/' . $sop->file_sop) }}"><i
+                                            class="bi bi-file-earmark-text-fill"></i>
+                                        file sop</a>
+                                </td>
+                                <td>
+                                    <a class="btn" style="color: red">
+                                        <i class="bi bi-trash-fill fa-lg" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal{{ $sop['id'] }}"></i></a>
+                                    <div class="modal fade" style="left: 0px" id="deleteModal{{ $sop['id'] }}"
+                                        tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-body mt-3">
+                                                    <form action="/admin/sop/{{ $sop->id }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <div class="mb-3">
+                                                            <h5>Apakah anda yakin menghapus
+                                                                {{ $sop->nama_sop }} ?
                                                             </h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
                                                         </div>
-                                                        <form action="{{ route('sop.update', $sop->id) }}" method="POST">
-                                                            @csrf
-                                                            <div class="modal-body">
-                                                                <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control"
-                                                                        id="officer_name" name="'officer_name"
-                                                                        placeholder="officer_name"
-                                                                        value="{{ old('officer_name', $sop->officer_name) }}">
-                                                                    <label for="officer_name">Nama Petugas</label>
-                                                                </div>
-                                                                <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control"
-                                                                        id="position" name="'position"
-                                                                        placeholder="position"
-                                                                        value="{{ old('position', $sop->position) }}">
-                                                                    <label for="position">Jabatan</label>
-                                                                </div>
-                                                                <div class="form-floating mb-3">
-                                                                    <input type="text" class="form-control"
-                                                                        id="no_hp" name="'no_hp" placeholder="no_hp"
-                                                                        value="{{ old('no_hp', $sop->no_hp) }}">
-                                                                    <label for="no_hp">Nomor Handphone</label>
-                                                                </div>
-                                                                <div class="form m-1">
-                                                                    <label for="officer_photo">Upload Foto
-                                                                        Petugas</label>
-                                                                </div>
-                                                                <input type="file" class="form-control"
-                                                                    id="officer_photo" name="'officer_photo"
-                                                                    accept="image">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-outline-secondary"
-                                                                    data-bs-dismiss="modal">Batal</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Simpan</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
                                                 </div>
-                                            </div>
-                                        </h5>
-                                        <p class="mb-2 pb-1" style="color: #2b2a2a;">{{ $sop->position }}</p>
-                                        <p class="mb-2 pb-1" style="color: #2b2a2a;">No Hp:{{ $sop->no_hp }}</p>
-                                        <div class="d-flex pt-1">
-                                            <a type="button" class="btn btn-outline-primary me-1 flex-grow-1"
-                                                href="/admin/sop/schedule"><i style="color: white"
-                                                    class="bi bi-file-earmark-text-fill" aria-hidden="true"></i>
-                                                Tugas</a>
-                                            <a class="btn  btn-outline-danger me-1 flex-grow-1" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal{{ $sop['id'] }}">
-                                                <i style="color: white" class="fas fa-trash fa-sm  "></i> Hapus
-                                            </a>
-                                            <div class="modal fade" id="deleteModal{{ $sop['id'] }}" tabindex="-1"
-                                                aria-labelledby="deleteModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content" style="border-radius: 10px">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <form action="{{ route('sop.destroy', $sop->id) }}"></form>
-                                                        <div class="modal-body text-center">
-                                                            <h4>Apakah anda yakin menghapus petugas ini ?</h4>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-outline-secondary"
-                                                                data-bs-dismiss="modal">Batal</button>
-                                                            <button type="button" class="btn btn-danger">Hapus</button>
-                                                        </div>
-                                                    </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-secondary"
+                                                        data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-danger">Hapus</button>
                                                 </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @else
+            <div class="card border-0 mt-5" style="display: flex; align-items: center;">
+                <div class="card bg-light border-0 text-center w-75 h-100">
+                    <div class="card-body">
+                        <h5 style="font-size: 45px;" class="text-muted mt-3 mb-3">
+                            <strong>Data Masih Kosong Nich!</strong>
+                        </h5>
                     </div>
                 </div>
             </div>
-        @endforeach --}}
-
-    </div>
-@endsection()
+        @endif
+    @endsection()

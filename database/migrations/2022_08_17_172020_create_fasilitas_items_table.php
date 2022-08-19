@@ -17,6 +17,7 @@ class CreateFasilitasItemsTable extends Migration
             $table->id();
             $table->foreignId('fasilitas_id')->nullable()->on('fasilitas')->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('room_id')->nullable()->on('rooms')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('jumlah');
             $table->timestamps();
         });
     }

@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Daftar Ruang {{ $tipe }}</h1>
+        <h1 class="mt-4">Daftar Ruangan {{ $tipe }}</h1>
         <hr>
         <div class="mt-2 mb-4">
             <a class="btn btn-sm btn-secondary" href="/admin/dashboard"><i class="fa fa-arrow-left" aria-hidden="true"></i>
@@ -18,7 +18,6 @@
                         </div>
                         <form action="{{ route('store', $tipe) }}" method="POST" enctype="multipart/form-data">
                             @csrf
-
                             <input type="hidden" name="type" value="{{ $type }}">
                             <div class="modal-body">
                                 <div class="mb-3">
@@ -39,12 +38,18 @@
                                 <div class="mb-3">
                                     <label for="fasilitas"> Pilih fasilitas ruangan</label>
                                     @foreach ($data as $fasilitas)
-                                        <div class="form-check">
-                                            <input class="form-check-input" name="fasilitas[]" type="checkbox"
-                                                value="{{ $fasilitas->id }}" id="fasilitas{{ $fasilitas->id }}">
-                                            <label class="form-check-label" for="fasilitas-{{ $fasilitas->id }}">
-                                                {{ $fasilitas->nama_fasilitas }}
-                                            </label>
+                                        <div class="col-sm-10">
+                                            <div class="form-check">
+                                                <input class="form-check-input" name="fasilitas[]" type="checkbox"
+                                                    value="{{ $fasilitas->id }}" id="fasilitas{{ $fasilitas->id }}">
+                                                <label class="form-check-label" for="fasilitas{{ $fasilitas->id }}">
+                                                    {{ $fasilitas->nama_fasilitas }}
+                                                </label>
+                                                <label for="jumlah"></label>
+                                                <input type="text" name="jumlah[{{ $fasilitas->id }}]" id="jumlah"
+                                                    placeholder="..." style="border: 0ch; width: 25px" class="shadow-sm">
+                                            </div>
+
                                         </div>
                                     @endforeach
                                 </div>
@@ -63,8 +68,8 @@
                 <div class="col">
                     <div class="card h-100">
                         <div class="card-body shadow">
-                            <img src="{{ asset('storage/' . $room->foto_ruangan) }}" class="card-img-top-center"
-                                width="70px" height="70px">
+                            <img src="{{ asset('storage/' . $room->foto_ruangan) }}" class="card-img-top" width="70px"
+                                height="200px" style="object-fit: cover">
                             <h5 class="card-title">{{ $room->nama_ruangan }}<a
                                     href="/admin/dashboard/rooms/{{ $room->id }}/edit" data-bs-toggle="modal"
                                     data-bs-target="#editModal{{ $room['id'] }}"><i style="color: darkgoldenrod"
@@ -130,11 +135,11 @@
                             <p class="card-text">Fasilitas:
                             <ul class="text-start">
                                 @foreach ($room->fasilitasItem as $item)
-                                    {{-- <li>{{ $item->fasilitas->nama_fasilitas }}</li> --}}
+                                    <li>{{ $item->fasilitas->nama_fasilitas }} ({{ $item->jumlah }})</li>
                                 @endforeach
                             </ul>
                             </p>
-                            <a href="#" class="btn btn-md float-end" data-bs-toggle="modal"
+                            <a href="{{ route('edit', $room->id) }}" class="btn btn-md float-end" data-bs-toggle="modal"
                                 data-bs-target="#deleteModal{{ $room['id'] }}"><i style="color:red"
                                     class="fas fa-trash fa-lg  "></i></a>
                             <div class="modal fade" id="deleteModal{{ $room['id'] }}" tabindex="-1"

@@ -3,11 +3,11 @@
         <div class="nav mt-4">
             <a class="nav-link {{ Request::is('dosen/dashboard*') ? 'active' : '' }}" href="/dosen/dashboard">
                 <div class="sb-nav-link-icon"><i class="bi bi-grid-1x2"></i></div>
-                Dashboard dosen
+                Dashboard
             </a>
             <a class="nav-link {{ Request::is('dosen/sop*') ? 'active' : '' }}" href="/dosen/sop">
                 <div class="sb-nav-link-icon"><i class="bi bi-file-earmark-text"></i></div>
-                SOP OB
+                SOP Kebersihan ITG
             </a>
             <a class="nav-link {{ Request::is('dosen/schedules*') ? 'active' : '' }}" href="/dosen/schedules">
                 <div class="sb-nav-link-icon"><i class="bi bi-calendar3"></i></div>

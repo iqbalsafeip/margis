@@ -12,6 +12,7 @@ class Officer extends Model
         'nama_petugas',
         'jabatan',
         'no_hp',
-        'foto'
+        'foto',
+        'ktp'
     ];
 }

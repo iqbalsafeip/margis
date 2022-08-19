@@ -22,6 +22,13 @@ class ScheduleController extends Controller
         $schedules = Schedule::all();
         return view('admin.schedules.index', compact('areas', 'officers', 'schedules'));
     }
+    public function indexDosen()
+    {
+        $areas = Area::all();
+        $officers = Officer::all();
+        $schedules = Schedule::all();
+        return view('dosen.schedules.index', compact('areas', 'officers', 'schedules'));
+    }
 
     /**
      * Show the form for creating a new resource.

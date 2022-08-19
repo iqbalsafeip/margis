@@ -20,4 +20,9 @@ class Schedule extends Model
     {
         return $this->belongsTo(Officer::class, 'officer_id');
     }
+
+    public function media()
+    {
+        return $this->hasMany(Media::class, 'schedule');
+    }
 }

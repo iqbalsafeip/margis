@@ -5,8 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Fasilitas extends Model
+class Media extends Model
 {
     use HasFactory;
-    protected $fillable = ['nama_fasilitas'];
+    protected $fillable=[
+        'report_id',
+        'schedule',
+        'photos',
+    ];
 }

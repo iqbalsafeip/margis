@@ -21,6 +21,13 @@ class RoomController extends Controller
         $tipe = $this->getTypeLabel($type);
         return view('admin.dashboard.rooms.index', compact('data', 'rooms', 'tipe', 'type'));
     }
+    public function indexDosen($type)
+    {
+        $data = Fasilitas::all();
+        $rooms = Room::where('tipe', $type)->get();
+        $tipe = $this->getTypeLabel($type);
+        return view('dosen.dashboard.rooms.index', compact('data', 'rooms', 'tipe', 'type'));
+    }
 
     private function getTypeLabel($type)
     {
@@ -61,12 +68,12 @@ class RoomController extends Controller
             'fasilitas' => 'required',
             'foto_ruangan' => 'required',
             'keterangan' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'jumlah' => 'required'
         ]);
         if ($request->file('foto_ruangan')) {
             $data['foto_ruangan'] = $request->file('foto_ruangan')->store('foto-ruangan');
         }
-
         $room = new Room();
         $room->nama_ruangan = $data['nama_ruangan'];
         $room->foto_ruangan = $data['foto_ruangan'];
@@ -76,7 +83,8 @@ class RoomController extends Controller
         foreach ($data['fasilitas'] as $fasilitas) {
             FasilitasItem::create([
                 'fasilitas_id' => $fasilitas,
-                'room_id' => $room->id
+                'room_id' => $room->id,
+                'jumlah' => $data['jumlah'][$fasilitas]
             ]);
         }
         return back()->with('toast_success', 'Ruangan berhasil dibuat');
@@ -133,13 +141,13 @@ class RoomController extends Controller
         $room->tipe = $data['type'];
         $room->update();
         if ($request->fasilitas) {
-        foreach ($data['fasilitas'] as $fasilitas) {
-            FasilitasItem::create([
-                'fasilitas_id' => $fasilitas,
-                'room_id' => $room->id
-            ]);
+            foreach ($data['fasilitas'] as $fasilitas) {
+                FasilitasItem::update([
+                    'fasilitas_id' => $fasilitas,
+                    'room_id' => $room->id
+                ]);
+            }
         }
-    }
         return back()->with('toast_success', 'Ruangan berhasil diubah');
     }
 

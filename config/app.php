@@ -66,8 +66,9 @@ return [
     | ahead and set this to a sensible default for you out of the box.
     |
     */
+    'timezone' => 'Asia/Jakarta',
 
-    'timezone' => 'UTC',
+    // 'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -79,8 +80,9 @@ return [
     | to any of the locales which will be supported by the application.
     |
     */
+    'locale' => 'id',
 
-    'locale' => 'en',
+    // 'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -92,8 +94,8 @@ return [
     | the language folders that are provided through your application.
     |
     */
-
-    'fallback_locale' => 'en',
+    'faker_locale' => 'id_ID',
+    // 'fallback_locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------

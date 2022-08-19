@@ -13,7 +13,7 @@
                                     href="/dosen/dashboard/rooms/staff">
                                     RUANG STAFF</a>
                                 <hr>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">4 Unit</div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $rooms }} Unit</div>
                             </div>
                             <div class="col-auto">
                                 <i class="bi bi-person-badge fa-2x text-gray-300 "></i>

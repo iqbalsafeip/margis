@@ -43,11 +43,15 @@ class OfficerController extends Controller
             'nama_petugas' => 'string',
             'jabatan' => 'string',
             'no_hp' => 'string',
-            'foto' => 'image'
+            'foto' => 'image',
+            'ktp' => 'image',
         ]);
 
         if ($request->file('foto')) {
             $data['foto'] = $request->file('foto')->store('foto-petugas');
+        }
+        if ($request->file('ktp')) {
+            $data['ktp'] = $request->file('ktp')->store('ktp-petugas');
         }
         Officer::create($data);
         return redirect()->route('officer.index')->with('toast_success', 'Petugas berhasil ditambahkan');
@@ -90,11 +94,15 @@ class OfficerController extends Controller
             'nama_petugas' => 'string',
             'jabatan' => 'string',
             'no_hp' => 'string',
-            'foto' => 'image'
+            'foto' => 'image',
+            'ktp' => 'image'
         ]);
 
         if ($request->file('foto')) {
             $data['foto'] = $request->file('foto')->store('foto-petugas');
+        }
+        if ($request->file('ktp')) {
+            $data['ktp'] = $request->file('ktp')->store('ktp-petugas');
         }
         $officer->nama_petugas = $request->nama_petugas;
         $officer->jabatan = $request->jabatan;

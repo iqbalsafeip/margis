@@ -18,6 +18,7 @@ class CreateOfficersTable extends Migration
             $table->string('nama_petugas');
             $table->string('jabatan');
             $table->string('no_hp');
+            $table->string('ktp');
             $table->string('foto');
             $table->timestamps();
         });

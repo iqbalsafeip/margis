@@ -1,26 +1,20 @@
 @extends('admin.layouts.main')
 @section('content')
-    <h1 class="mt-4">My Profile Account</h1>
+    <h1 class="mt-4">Profile Saya</h1>
     <hr>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-
                 <div class="card-body">
-
-
-
                     <div class="row">
                         <div class="col-md-4">
-
                             <img src="{{ asset('/img/avatar.jpg') }}" class="img-thumbnail rounded mx-auto d-block">
-
-
                         </div>
                         <div class="col-md-8">
-                            <form method="POST" action="#" enctype="multipart/form-data">
-                                @method('PATCH')
+                            <form method="POST" action="{{ route('profile.update', $user->id) }}"
+                                enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
 
                                 <div class="row mb-3">
                                     <label for="username"
@@ -29,7 +23,7 @@
                                     <div class="col-md-6">
                                         <input id="username" type="text"
                                             class="form-control @error('username') is-invalid @enderror" name="username"
-                                            required autocomplete="username">
+                                            required autocomplete="username" value="{{ old('username', $user->username) }}">
 
                                         @error('username')
                                             <span class="invalid-feedback" role="alert">
@@ -46,7 +40,7 @@
                                     <div class="col-md-6">
                                         <input id="email" type="email"
                                             class="form-control @error('email') is-invalid @enderror" name="email"
-                                            required autocomplete="email">
+                                            required autocomplete="email" value="{{ old('email', $user->email) }}">
 
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
@@ -117,7 +111,6 @@
                                     </div>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>

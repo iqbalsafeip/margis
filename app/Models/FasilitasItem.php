@@ -10,7 +10,8 @@ class FasilitasItem extends Model
     use HasFactory;
     protected $fillable = [
         'fasilitas_id',
-        'room_id'
+        'room_id',
+        'jumlah',
     ];
     public function fasilitas()
     {

@@ -31,7 +31,7 @@
             </a>
             <a class="nav-link {{ Request::is('admin/sop*') ? 'active' : '' }}" href="/admin/sop">
                 <div class="sb-nav-link-icon"><i class="bi bi-file-earmark-text"></i></div>
-                SOP OB
+                SOP Kebersihan ITG
             </a>
         </div>
     </div>
