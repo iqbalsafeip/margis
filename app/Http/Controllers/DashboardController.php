@@ -9,9 +9,17 @@ class DashboardController extends Controller
 {
     public function dashboardAdmin()
     {
-        $rooms = Room::count();
+        // $rooms = Room::count();
+
+        $count = [
+            'staff' => count(Room::where('tipe', 'staff')->get()),
+            'kelas' => count(Room::where('tipe', 'kelas')->get()),
+            'dosen' => count(Room::where('tipe', 'dosen')->get()),
+            'lab' => count(Room::where('tipe', 'lab')->get()),
+            'lainnya' => count(Room::where('tipe', 'lainnya')->get())
+        ];
         // $tipe = $this->getTypeLabel($type);
-        return view('admin.dashboard.index', compact('rooms'));
+        return view('admin.dashboard.index', compact('count'));
     }
     public function dashboardDosen()
     {
@@ -26,11 +34,11 @@ class DashboardController extends Controller
                 return "Staff";
             case 'kelas':
                 return "Kelas";
-            case 'lecturer':
+            case 'dosen':
                 return 'Dosen';
             case 'lab':
                 return 'Labolatorium';
-            case 'etc':
+            case 'lainnya':
                 return 'Lainnya';
         }
     }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Area;
+use App\Models\Fasilitas;
+use App\Models\FasilitasItem;
 use Illuminate\Http\Request;
 
 class AreaController extends Controller
@@ -14,8 +16,9 @@ class AreaController extends Controller
      */
     public function index()
     {
+        $data = Fasilitas::all();
         $areas = Area::all();
-        return view('admin.area.index', compact('areas'));
+        return view('admin.area.index', compact('data', 'areas'));
     }
 
     /**
@@ -36,13 +39,24 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'area_tugas' => 'string',
+        // dd($request->all());
+        $data = $request->validate([
+            'area_tugas' => 'required',
+            'fasilitas' => 'required',
         ]);
+
         $area = new Area();
-        $area->area_tugas = $request->area_tugas;
+        $area->area_tugas = $data['area_tugas'];
         $area->save();
-        return redirect()->route('area.index')->with('toast_success', 'Area tugas berhasil dibuat');
+        foreach ($data['fasilitas'] as $fasilitas) {
+            FasilitasItem::create([
+                'fasilitas_id' => $fasilitas,
+                // 'room_id' => $area->id,
+                'area_id' => $area->id,
+                // 'jumlah' => $data['jumlah'][$fasilitas]
+            ]);
+        }
+        return back()->with('toast_success', 'Area berhasil dibuat');
     }
 
     /**
@@ -78,11 +92,20 @@ class AreaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $data = $request->validate([
             'area_tugas' => 'string',
+            'fasilitas' => 'string',
         ]);
         $area = Area::find($id);
         $area->area_tugas = $request->area_tugas;
+        foreach ($data['fasilitas'] as $fasilitas) {
+            FasilitasItem::create([
+                'fasilitas_id' => $fasilitas,
+                'room_id' => $area->id,
+                'jumlah' => $data['jumlah'][$fasilitas]
+            ]);
+        }
+        $area->fasilitas = $request->fasilitas;
         $area->save();
         return redirect()->route('area.index')->with('toast_success', 'Area tugas berhasil dibuat');
     }

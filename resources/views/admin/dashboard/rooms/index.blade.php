@@ -2,6 +2,7 @@
 @section('content')
     <div class="container-fluid px-4">
         <h1 class="mt-4">Daftar Ruangan {{ $tipe }}</h1>
+        <p class="text-muted" style="font-size: 12px"><i>*pastikan sudah menambah petugas dan fasilitas</i></p>
         <hr>
         <div class="mt-2 mb-4">
             <a class="btn btn-sm btn-secondary" href="/admin/dashboard"><i class="fa fa-arrow-left" aria-hidden="true"></i>
@@ -30,10 +31,13 @@
                                         placeholder="nama_ruangan">
                                     <label for="nama_ruangan">Nama Ruangan</label>
                                 </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="keterangan" name="keterangan"
-                                        placeholder="keterangan">
-                                    <label for="keterangan">Keterangan</label>
+                                <div class="mb-3">
+                                    <select class="form-select" name="petugas">
+                                        <option selected>Pilih Petugas Penanggung Jawab</option>
+                                        @foreach ($officers as $off)
+                                            <option value="{{ $off->nama_petugas }}">{{ $off->nama_petugas }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="fasilitas"> Pilih fasilitas ruangan</label>
@@ -49,7 +53,6 @@
                                                 <input type="text" name="jumlah[{{ $fasilitas->id }}]" id="jumlah"
                                                     placeholder="..." style="border: 0ch; width: 25px" class="shadow-sm">
                                             </div>
-
                                         </div>
                                     @endforeach
                                 </div>
@@ -101,11 +104,14 @@
                                                         value="{{ old('nama_ruangan', $room->nama_ruangan) }}">
                                                     <label for="nama_ruangan">Nama Ruangan</label>
                                                 </div>
-                                                <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" id="keterangan"
-                                                        name="keterangan" placeholder="keterangan"
-                                                        value="{{ old('keterangan', $room->keterangan) }}">
-                                                    <label for="keterangan">Keterangan</label>
+                                                <div class="mb-3">
+                                                    <select class="form-select" name="petugas">
+                                                        <option selected>Pilih Petugas Penanggung Jawab</option>
+                                                        @foreach ($officers as $off)
+                                                            <option value="{{ $off->id }}">{{ $off->nama_petugas }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="fasilitas"> Pilih fasilitas ruangan</label>
@@ -131,7 +137,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <p class="card-text">Ket: {{ $room->keterangan }}</p>
+                            <p class="card-text">Penanggung Jawab: {{ $room->petugas }}</p>
                             <p class="card-text">Fasilitas:
                             <ul class="text-start">
                                 @foreach ($room->fasilitasItem as $item)

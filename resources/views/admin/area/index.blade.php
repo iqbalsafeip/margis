@@ -1,31 +1,46 @@
 @extends('admin.layouts.main')
 @section('content')
-    <h1 class="mt-4">Daftar Area Tugas Kebersihan</h1>
+    <h1 class="mt-4">
+        Daftar Area Tugas Kebersihan</h1>
     <hr class="my-0">
     <button type="button" class="btn btn-primary btn-md mb-3 mt-3" data-bs-toggle="modal" data-bs-target="#addModal">
         + Tambah Area Tugas Kebersihan
     </button>
     <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content" style="border-radius: 10px">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Tambah Petugas Kebersihan</h5>
+                    <h5 class="modal-title" id="addModalLabel">Tambah Area Tugas</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="{{ route('area.store') }}" method="POST">
                     @csrf
                     <div class="modal-body">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control @error('area_tugas') is-invalid @enderror"
-                                id="area_tugas" name="area_tugas" placeholder="area_tugas">
-                            @if ($errors->has('area_tugas'))
-                                <span class="text-danger">{{ $errors->first('area_tugas') }}</span>
-                            @endif
-                            <label for="area_tugas">Area Tugas Kebersihan</label>
+                            <input type="text" class="form-control" id="area_tugas" name="area_tugas"
+                                placeholder="area_tugas">
+                            <label for="area_tugas">Nama Ruangan</label>
+                        </div>
+                        <div class="mb-3">
+                            <label for="fasilitas"> Pilih fasilitas ruangan</label>
+                            <div class="row">
+
+                                @foreach ($data as $fasilitas)
+                                    <div class="col-3">
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="fasilitas[]" type="checkbox"
+                                                value="{{ $fasilitas->id }}" id="fasilitas{{ $fasilitas->id }}">
+                                            <label class="form-check-label" for="fasilitas{{ $fasilitas->id }}">
+                                                {{ $fasilitas->nama_fasilitas }}
+                                            </label>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
                 </form>
@@ -39,6 +54,7 @@
                     <tr>
                         <th scope="col">No</th>
                         <th scope="col">Area Tugas</th>
+                        <th scope="col">Fasilitas </th>
                         <th scope="col" class="text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -50,6 +66,13 @@
                         <tr>
                             <th scope="row">{{ $no++ }}</th>
                             <td>{{ $area->area_tugas }}</td>
+                            <td>
+                                <ul class="text-start">
+                                    @foreach ($area->fasilitasItem as $item)
+                                        <li>{{ $item->fasilitas->nama_fasilitas }}</li>
+                                    @endforeach
+                                </ul>
+                            </td>
                             <td class="text-center">
                                 <a href="{{ route('area.edit', $area->id) }}" data-bs-toggle="modal"
                                     data-bs-target="#editModal{{ $area['id'] }}"

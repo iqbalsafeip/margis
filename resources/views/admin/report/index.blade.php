@@ -1,7 +1,7 @@
 @extends('admin.layouts.main')
 @section('content')
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Laporan Kebersihan Ruangan ITG</h1>
+        <h1 class="mt-4">Laporan Kebersihan ITG</h1>
         <hr>
         <button type="button" class="btn btn-primary btn-sm mb-3 mt-2 " data-bs-toggle="modal" data-bs-target="#addModal">
             + Tambah Laporan Kebersihan
@@ -78,7 +78,8 @@
                                     @endswitch
                                 </td>
                                 <td class="text-center">
-                                    <a href="{{ route('main', ['periode' => $report->periode, 'report' => $report->id]) }}"><i
+                                    <a
+                                        href="{{ route('laporan', ['periode' => $report->periode, 'report' => $report->id]) }}"><i
                                             class="bi bi-journal-text"></i></a>
                                 </td>
                                 <td class="text-center">

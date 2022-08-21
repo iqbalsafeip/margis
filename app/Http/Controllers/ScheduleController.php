@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Area;
 use App\Models\AreaTugasItem;
+use App\Models\Fasilitas;
 use App\Models\Officer;
 use App\Models\Schedule;
 use Illuminate\Http\Request;

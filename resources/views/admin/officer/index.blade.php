@@ -30,14 +30,7 @@
                             @endif
                             <label for="nama_petugas">Nama Petugas</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control @error('jabatan') is-invalid @enderror" id="jabatan"
-                                name="jabatan" placeholder="jabatan">
-                            @if ($errors->has('jabatan'))
-                                <span class="text-danger">{{ $errors->first('jabatan') }}</span>
-                            @endif
-                            <label for="jabatan">Jabatan</label>
-                        </div>
+
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control @error('no_hp') is-invalid @enderror" id="no_hp"
                                 name="no_hp" placeholder="no_hp">
@@ -64,13 +57,12 @@
     </div>
     @if ($officers->count() > 0)
         <div class="card-body col-md-auto p-2 table-responsive shadow">
-            <table id="table" class="table table-striped">
+            <table id="table" class="table table-striped text-center">
                 <thead class="table-dark">
                     <tr>
-                        <th scope="col">No</th>
-                        <th scope="col"class="text-center">Nama Petugas</th>
-                        <th scope="col" class="text-center">Jabatan</th>
-                        <th scope="col">Nomor Handphone</th>
+                        <th scope="col" class="text-center">No</th>
+                        <th scope="col" class="text-center">Nama Petugas</th>
+                        <th scope="col" class="text-center">Nomor Handphone</th>
                         <th scope="col" class="text-center">Foto KTP</th>
                         <th scope="col" class="text-center">Aksi</th>
                     </tr>
@@ -87,7 +79,6 @@
                                 <img src="{{ asset('storage/' . $officer->foto) }}"
                                     style="height: 100px; width: 60px; object-fit: cover">
                             </td>
-                            <td class="text-center">{{ $officer->jabatan }}</td>
                             <td>{{ $officer->no_hp }}</td>
                             <td class="text-center">
                                 <img src="{{ asset('storage/' . $officer->ktp) }}"
@@ -100,8 +91,8 @@
                                     class="btn edit"style="color: rgb(128, 87, 223)">
                                     <i class="bi bi-pencil-fill"></i></a>|
                                 <!-- Start Edit user Modal -->
-                                <div class="modal fade" style="left: 0px" id="editModal{{ $officer['id'] }}"
-                                    tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                                <div class="modal fade" style="left: 0px" id="editModal{{ $officer['id'] }}" tabindex="-1"
+                                    aria-labelledby="editModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -115,6 +106,15 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="modal-body">
+                                                    <div class="mb-3 text-start">
+                                                        <label for="foto" class="form-label">Upload foto petugas
+                                                            disini</label>
+                                                        <input class="form-control  @error('foto') is-invalid @enderror"
+                                                            type="file" name="foto">
+                                                        @if ($errors->has('foto'))
+                                                            <span class="text-danger">{{ $errors->first('foto') }}</span>
+                                                        @endif
+                                                    </div>
                                                     <div class="form-floating mb-3">
                                                         <input type="text"
                                                             class="form-control @error('nama_petugas') is-invalid @enderror"
@@ -127,17 +127,7 @@
                                                         @endif
                                                         <label for="nama_petugas">Nama Petugas</label>
                                                     </div>
-                                                    <div class="form-floating mb-3">
-                                                        <input type="text"
-                                                            class="form-control @error('jabatan') is-invalid @enderror"
-                                                            id="jabatan" name="jabatan" placeholder="jabatan"
-                                                            value="{{ old('jabatan', $officer->jabatan) }}">
-                                                        @if ($errors->has('jabatan'))
-                                                            <span
-                                                                class="text-danger">{{ $errors->first('jabatan') }}</span>
-                                                        @endif
-                                                        <label for="jabatan">Jabatan</label>
-                                                    </div>
+
                                                     <div class="form-floating mb-3">
                                                         <input type="text"
                                                             class="form-control @error('no_hp') is-invalid @enderror"
@@ -148,14 +138,13 @@
                                                         @endif
                                                         <label for="no_hp">Nomor Handphone</label>
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <label for="foto" class="form-label">Upload foto
+                                                    <div class="mb-3 text-start">
+                                                        <label for="ktp" class="form-label">Upload foto KTP
                                                             disini</label>
-                                                        <input class="form-control  @error('foto') is-invalid @enderror"
-                                                            type="file" name="foto"
-                                                            value="{{ old('foto', $officer->foto) }}">
-                                                        @if ($errors->has('foto'))
-                                                            <span class="text-danger">{{ $errors->first('foto') }}</span>
+                                                        <input class="form-control  @error('ktp') is-invalid @enderror"
+                                                            type="file" name="ktp">
+                                                        @if ($errors->has('ktp'))
+                                                            <span class="text-danger">{{ $errors->first('ktp') }}</span>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -164,6 +153,7 @@
                                                         data-bs-dismiss="modal">Batal</button>
                                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                                 </div>
+
                                             </form>
                                         </div>
                                     </div>

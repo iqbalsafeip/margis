@@ -11,7 +11,7 @@ class Room extends Model
     protected $fillable = [
         'nama_ruangan',
         'foto_ruangan',
-        'keterangan',
+        'petugas',
         'tipe'
     ];
     public function fasilitasItem()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Fasilitas;
 use App\Models\FasilitasItem;
+use App\Models\Officer;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
@@ -16,17 +17,20 @@ class RoomController extends Controller
      */
     public function index($type)
     {
+        $officers = Officer::all();
         $data = Fasilitas::all();
         $rooms = Room::where('tipe', $type)->get();
         $tipe = $this->getTypeLabel($type);
-        return view('admin.dashboard.rooms.index', compact('data', 'rooms', 'tipe', 'type'));
+        return view('admin.dashboard.rooms.index', compact('officers', 'data', 'rooms', 'tipe', 'type'));
     }
     public function indexDosen($type)
     {
+
+        $officers = Officer::all();
         $data = Fasilitas::all();
         $rooms = Room::where('tipe', $type)->get();
         $tipe = $this->getTypeLabel($type);
-        return view('dosen.dashboard.rooms.index', compact('data', 'rooms', 'tipe', 'type'));
+        return view('dosen.dashboard.rooms.index', compact('officers', 'data', 'rooms', 'tipe', 'type'));
     }
 
     private function getTypeLabel($type)
@@ -36,11 +40,11 @@ class RoomController extends Controller
                 return "Staff";
             case 'kelas':
                 return "Kelas";
-            case 'lecturer':
+            case 'dosen':
                 return 'Dosen';
             case 'lab':
                 return 'Labolatorium';
-            case 'etc':
+            case 'lainnya':
                 return 'Lainnya';
         }
     }
@@ -67,7 +71,7 @@ class RoomController extends Controller
             'nama_ruangan' => 'required',
             'fasilitas' => 'required',
             'foto_ruangan' => 'required',
-            'keterangan' => 'required',
+            'petugas' => 'required',
             'type' => 'required',
             'jumlah' => 'required'
         ]);
@@ -77,7 +81,7 @@ class RoomController extends Controller
         $room = new Room();
         $room->nama_ruangan = $data['nama_ruangan'];
         $room->foto_ruangan = $data['foto_ruangan'];
-        $room->keterangan = $data['keterangan'];
+        $room->petugas = $data['petugas'];
         $room->tipe = $data['type'];
         $room->save();
         foreach ($data['fasilitas'] as $fasilitas) {
@@ -127,13 +131,13 @@ class RoomController extends Controller
             'nama_ruangan' => 'nullable',
             'fasilitas' => 'nullable',
             'foto_ruangan' => 'nullable',
-            'keterangan' => 'nullable',
+            'petugas' => 'nullable',
             'type' => 'nullable',
             'id' => 'nullable'
         ]);
         $room = Room::find($data['id']);
         $room->nama_ruangan = $data['nama_ruangan'];
-        $room->keterangan = $data['keterangan'];
+        $room->petugas = $data['petugas'];
         if ($request->file('foto_ruangan')) {
             $data['foto_ruangan'] = $request->file('foto_ruangan')->store('foto-ruangan');
             $room->foto_ruangan = $data['foto_ruangan'];

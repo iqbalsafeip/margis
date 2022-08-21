@@ -56,18 +56,17 @@
                                 </td>
                                 <td>{{ $schedule->officers->nama_petugas }}</td>
                                 <td><button type="button" class="btn btn-primary btn-sm mb-3 mt-2 " data-bs-toggle="modal"
-                                        data-bs-target="#addModal">
+                                        data-bs-target="#addModal{{ $schedule->id }}">
                                         + Upload File
                                     </button>
                                     <div class="mt-0">
-                                        @foreach ($schedule->media()->where('report_id', $report)->get() as $media )
-
-                                        <img src="{{ asset('storage/' . $media->photos) }}"
-                                            style="height: 100px; width: 60px; object-fit: cover">
+                                        @foreach ($schedule->media()->where('report_id', $report)->get() as $media)
+                                            <img src="{{ asset('storage/' . $media->photos) }}"
+                                                style="height: 100px; width: 60px; object-fit: cover">
                                         @endforeach
                                     </div>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel"
+                                    <div class="modal fade" id="addModal{{ $schedule->id }}" tabindex="-1" aria-labelledby="addModalLabel"
                                         aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content" style="border-radius: 10px">
@@ -79,8 +78,8 @@
                                                 <form action="{{ route('media') }}" method="POST"
                                                     enctype="multipart/form-data">
                                                     @csrf
-                                                    <input type="hidden" name="skedulid" value="{{ $schedule->id }}" >
-                                                    <input type="hidden" name="report" value="{{ $report }}" >
+                                                    <input type="hidden" name="skedulid" value="{{ $schedule->id }}">
+                                                    <input type="hidden" name="report" value="{{ $report }}">
                                                     <div class="modal-body">
                                                         <label for="photos">tambah foto laporan disini</label>
                                                         <div class="mb-3">
@@ -99,7 +98,8 @@
                                     </div>
                                 </td>
                                 <td>
-                                    @if (count($schedule->media()->where('report_id', $report)->get()) > 0)
+                                    @if (count(
+                                        $schedule->media()->where('report_id', $report)->get()) > 0)
                                         <div class="badge bg-success">Selesai</div>
                                     @else
                                         <div class="badge bg-danger">Belum Selesai</div>

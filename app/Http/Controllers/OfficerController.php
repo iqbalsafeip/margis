@@ -18,6 +18,11 @@ class OfficerController extends Controller
         $officers = Officer::all();
         return view('admin.officer.index', compact('officers'));
     }
+    public function indexDosen()
+    {
+        $officers = Officer::all();
+        return view('dosen.officer.index', compact('officers'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -41,7 +46,6 @@ class OfficerController extends Controller
         // dd($request);
         $data = $request->validate([
             'nama_petugas' => 'string',
-            'jabatan' => 'string',
             'no_hp' => 'string',
             'foto' => 'image',
             'ktp' => 'image',

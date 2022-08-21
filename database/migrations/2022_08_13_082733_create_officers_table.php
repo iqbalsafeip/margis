@@ -16,7 +16,6 @@ class CreateOfficersTable extends Migration
         Schema::create('officers', function (Blueprint $table) {
             $table->id();
             $table->string('nama_petugas');
-            $table->string('jabatan');
             $table->string('no_hp');
             $table->string('ktp');
             $table->string('foto');

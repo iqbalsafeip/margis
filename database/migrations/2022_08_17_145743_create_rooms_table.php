@@ -17,7 +17,7 @@ class CreateRoomsTable extends Migration
             $table->id();
             $table->string('nama_ruangan');
             $table->string('foto_ruangan');
-            $table->string('keterangan');
+            $table->string('petugas');
             $table->enum('tipe', ['staff', 'kelas', 'lab', 'dosen', 'lainnya']);
             $table->timestamps();
         });

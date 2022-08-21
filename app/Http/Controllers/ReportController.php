@@ -24,7 +24,8 @@ class ReportController extends Controller
         $reports = Report::all();
         return view('dosen.report.index', compact('reports'));
     }
-    public function main(Request $request)
+
+    public function laporan(Request $request)
     {
 
         $periode = $request->get('periode');
@@ -33,6 +34,7 @@ class ReportController extends Controller
 
         return view('admin.report.main', compact('schedules', 'report'));
     }
+
     public function mainDosen(Request $request)
     {
 

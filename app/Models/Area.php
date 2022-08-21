@@ -10,6 +10,8 @@ class Area extends Model
     use HasFactory;
     public $table = 'areas';
     public $fillable = ['area_tugas'];
-
-   
+    public function fasilitasItem()
+    {
+        return $this->hasMany(FasilitasItem::class, 'area_id');
+    }
 }

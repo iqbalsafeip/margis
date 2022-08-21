@@ -10,7 +10,6 @@ class Officer extends Model
     use HasFactory;
     protected $fillable = [
         'nama_petugas',
-        'jabatan',
         'no_hp',
         'foto',
         'ktp'

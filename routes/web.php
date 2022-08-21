@@ -47,7 +47,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/admin/dashboard/rooms/update', [RoomController::class, 'update'])->name('update');
     Route::delete('/admin/dashboard/rooms/{id}', [RoomController::class, 'destroy'])->name('destroy');
     Route::resource('/admin/report', ReportController::class);
-    Route::get('main', [ReportController::class, 'main'])->name('main');
+    Route::get('laporan', [ReportController::class, 'laporan'])->name('laporan');
     Route::post('media', [ReportController::class, 'media'])->name('media');
     // Route::post('/admin/officer', [OfficerController::class, 'store'])->name('store');
 });
@@ -62,14 +62,6 @@ Route::group(['middleware' => ['auth', 'role:dosen']], function () {
     Route::get('/dosen/sop', [SopController::class, 'indexDosen']);
     Route::get('/dosen/schedules', [ScheduleController::class, 'indexDosen']);
     Route::get('/dosen/report', [ReportController::class, 'indexDosen']);
+    Route::get('/dosen/officer', [OfficerController::class, 'indexDosen']);
     Route::get('main', [ReportController::class, 'mainDosen'])->name('mainDosen');
-});
-
-Route::get('/dosen/sop/schedule', function () {
-    return view('dosen.sop.schedule.index');
-});
-
-
-Route::get('/dosen/report/main', function () {
-    return view('dosen.report.main.index');
 });

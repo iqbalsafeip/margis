@@ -21,7 +21,7 @@
                             @if ($errors->has('nama_fasilitas'))
                                 <span class="text-danger">{{ $errors->first('nama_fasilitas') }}</span>
                             @endif
-                            <label for="nama_fasilitas">Fasilitas Tugas Kebersihan</label>
+                            <label for="nama_fasilitas">Fasilitas</label>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -80,7 +80,7 @@
                                                             <span
                                                                 class="text-danger">{{ $errors->first('nama_fasilitas') }}</span>
                                                         @endif
-                                                        <label for="nama_fasilitas">Fasilitas Tugas Kebersihan</label>
+                                                        <label for="nama_fasilitas">Fasilitas</label>
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
