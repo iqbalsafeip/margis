@@ -12,7 +12,9 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SopController;
 use App\Http\Controllers\UserController;
-
+use App\Models\DataMarket;
+use App\Models\Kecamatan;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,9 +26,28 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function (Request $request) {
+    $market = DataMarket::with('kecamatan', 'gambar');
+    if ($request->get('tipe_market')) {
+        $market->where('tipe_market', $request->get('tipe_market'));
+    }
+
+    if ($request->get('id_kecamatan')) {
+        $market->where('id_kecamatan', $request->get('id_kecamatan'));
+    }
+
+    $id_kecamatan = $request->get('id_kecamatan');
+
+    $market = $market->get();
+    $kecamatan = Kecamatan::all();
+
+    return view('welcome', compact('market', 'kecamatan', 'id_kecamatan'));
+})->name('main');
+Route::get('/login', function () {
     return view('login.index');
 })->name('login');
+
+
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::post('/', [LoginController::class, 'index'])->name('index');
@@ -40,7 +61,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('/admin/fasilitas', FasilitasController::class);
     Route::resource('/admin/schedules', ScheduleController::class);
     Route::resource('/admin/sop', SopController::class);
-    Route::get('/admin/dashboard', [DashboardController::class, 'dashboardAdmin']);
+    Route::get('/admin/dashboard', [DashboardController::class, 'dashboardAdmin'])->name('dashboardAdmin');
     Route::get('/admin/dashboard/rooms/{rooms:type}', [RoomController::class, 'index']);
     Route::post('/admin/dashboard/rooms', [RoomController::class, 'store'])->name('store');
     Route::post('/admin/dashboard/rooms/{id}/edit', [RoomController::class, 'edit'])->name('edit');

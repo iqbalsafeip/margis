@@ -1,98 +1,121 @@
 @extends('admin.layouts.main')
 @section('content')
-    <div class="container-fluid px-4">
-        <h1 class="mt-4">Ruangan Institut Teknologi Garut</h1>
-        <hr>
-        <div class="row">
+    <div class="container mt-2 ">
+        <div class="card mt-2 ">
+            <div class="card-header">
 
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card h-100 py-2 shadow">
-                    <div class="card-body ">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <a class="text-xs font-weight-bold text-primary mb-1" style="text-decoration: none"
-                                    href="/admin/dashboard/rooms/staff">
-                                    RUANG STAFF</a>
-                                <hr>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count['staff'] }} Unit</div>
+                Total Market by Perusahaan
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    @foreach ($type as $index => $kc)
+                        @if ($kc->tipe_market !== 'Lainnya')
+                            <div class="col-xl-2 col-md-4 mb-4">
+                                <div class="card border-left-primary shadow  p-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    {{ $kc->tipe_market }}</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">Total :
+                                                    {{ $kc->total }}
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                            <div class="col-auto">
-                                <i class="bi bi-person-badge fa-2x text-gray-300 "></i>
+                        @endif
+                    @endforeach
+                    @foreach ($type as $index => $kc)
+                        @if ($kc->tipe_market == 'Lainnya')
+                            <div class="col-xl-2 col-md-4 mb-4">
+                                <div class="card border-left-primary shadow  p-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    {{ $kc->tipe_market }}</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">Total :
+                                                    {{ $kc->total }}
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-market fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
+                        @endif
+                    @endforeach
+                    <div class="col-xl-2 col-md-4 mb-4">
+                        <div class="card border-left-primary shadow  p-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            Total</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Total : {{ $total }}
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-market fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card h-100 py-2 shadow">
-                    <div class="card-body ">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <a class="text-xs font-weight-bold text-primary mb-1" style="text-decoration: none"
-                                    href="/admin/dashboard/rooms/kelas">
-                                    RUANG KELAS</a>
-                                <hr>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count['kelas'] }} Unit</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="bi bi-easel2 fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="card mt-2">
+
+            <div class="card-header">
+                Total Market by Kecamatan
             </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card h-100 py-2 shadow">
-                    <div class="card-body ">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <a class="text-xs font-weight-bold text-primary mb-1" style="text-decoration: none"
-                                    href="/admin/dashboard/rooms/dosen">
-                                    RUANG DOSEN</a>
-                                <hr>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count['dosen'] }} Unit</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="bi bi-person-video2 fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card h-100 py-2 shadow">
-                    <div class="card-body ">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <a class="text-xs font-weight-bold text-primary mb-1" style="text-decoration: none"
-                                    href="/admin/dashboard/rooms/lab">
-                                    RUANG LABORATORIUM</a>
-                                <hr>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count['lab'] }} Unit</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="bi bi-pc-display fa-2x text-gray-300 "></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card h-100 py-2 shadow">
-                    <div class="card-body ">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <a class="text-xs font-weight-bold text-primary mb-1" style="text-decoration: none"
-                                    href="/admin/dashboard/rooms/lainnya">
-                                    RUANG LAINNYA</a>
-                                <hr>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $count['lainnya'] }} Unit</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="bi bi-list-ul fa-2x text-gray-300"></i>
+
+            <div class="card-body">
+
+                <div class="row">
+                    @foreach ($kecamatan as $index => $kc)
+                        <div class="col-xl-2 col-md-4 mb-4">
+                            <div class="card border-left-primary shadow  p-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-sm font-weight-bold text-primary text-uppercase mb-1">
+                                                {{ $kc->name }}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Total : {{ $kc->total }}
+                                            </div>
+                                        </div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-map fa-2x text-gray-300"></i>
+                                        </div>
+                                    </div>
+                                    <button class="btn" type="button" data-toggle="collapse"
+                                        data-target="#collapse-{{ $index }}" aria-expanded="false"
+                                        aria-controls="collapse-{{ $index }}">
+                                        Detail
+                                    </button>
+                                    <div class="collapse mt-2" id="collapse-{{ $index }}">
+                                        <ul class="list-group">
+                                            @foreach ($kc->market as $mk)
+                                                <li class="list-group-item">{{ $mk->tipe_market }} : {{ $mk->total }}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
