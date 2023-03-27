@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sistem Kebersihan ITG | Login</title>
+    <title>Peta Digital Investasi | Login</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
     <link href="/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -240,7 +240,7 @@
                         <h5>PEMERINTAH KABUPATEN GARUT</h5>
                         <h3>Dinas Penanaman Modal dan Pelayanan Terpadu Satu Pintu</h3>
                         <br>
-                        <h1>PETA POTENSI DAN PELUANG INVESTASI (PETA DIGITAL INVESTASI)</h1>
+                        <h1>PETA POTENSI DAN PELUANG INVESTASI (Peta Digital Investasi)</h1>
                         <h4>Toko Modern/ Minimarket Berjejaring</h4>
                     </div>
                 @endauth

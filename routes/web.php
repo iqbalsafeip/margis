@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin/profile', [ProfileController::class, 'index']);
     Route::put('/admin/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::resource('/admin/user', UserController::class);
+    Route::resource('/admin/market', UserController::class);
     Route::resource('/admin/officer', OfficerController::class);
     Route::resource('/admin/area', AreaController::class);
     Route::resource('/admin/fasilitas', FasilitasController::class);
