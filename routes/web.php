@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FasilitasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MarketController;
 use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportController;
@@ -56,7 +57,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/admin/profile', [ProfileController::class, 'index']);
     Route::put('/admin/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::resource('/admin/user', UserController::class);
-    Route::resource('/admin/market', UserController::class);
+    Route::resource('/admin/market', MarketController::class);
     Route::resource('/admin/officer', OfficerController::class);
     Route::resource('/admin/area', AreaController::class);
     Route::resource('/admin/fasilitas', FasilitasController::class);
