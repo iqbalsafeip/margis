@@ -7,9 +7,6 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
-                            <img src="{{ asset('/img/avatar.jpg') }}" class="img-thumbnail rounded mx-auto d-block">
-                        </div>
                         <div class="col-md-8">
                             <form method="POST" action="{{ route('profile.update', $user->id) }}"
                                 enctype="multipart/form-data">
@@ -94,14 +91,14 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <!-- <div class="row mb-3">
                                     <label for="password-confirm"
                                         class="col-md-4 col-form-label text-md-end">{{ __('Ganti Foto Profile') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="photo" type="file" class="form-control" name="photo">
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <div class="row mb-0">
                                     <div class="col-md-6 offset-md-4">

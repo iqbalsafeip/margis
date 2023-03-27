@@ -64,9 +64,11 @@
         </select>
         <select name="" id="tipeMarket" class="form-select">
             <option value="">Pilih Tipe Market</option>
-            @foreach ($kecamatan as $kec)
-            <option value="{{$kec->name}}">{{$kec->name}}</option>
-            @endforeach
+            <option value="Alfamart">Alfamart</option>
+            <option value="Indomart">Indomart</option>
+            <option value="Yomart">Yomart</option>
+            <option value="Alfamidi">Alfamidi</option>
+            <option value="Lainnya">Lainnya</option>
         </select>
     </div>
     <table id="table" class="table table-striped text-center">
@@ -94,8 +96,11 @@
                 <td>{{ $market->tipe_market }}</td>
 
                 <td class="text-center">
+                    
                     <a href="{{ route('market.edit', $market->id) }}/edit}}" data-bs-toggle="modal" data-bs-target="#editModal{{ $market['id'] }}" class="btn edit" style="color: rgb(128, 87, 223)">
                         <i class="bi bi-pencil-fill"></i></a>|
+                    <a href="{{route('market.detail', $market->id)}}"  class="btn " style="color: black">
+                    <i class="bi bi-map"></i></a>|
                     <!-- Start Edit user Modal -->
                     <div class="modal fade" style="left: 0px" id="editModal{{ $market['id'] }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -200,14 +205,15 @@
     $(document).ready(function() {
         let table = $('#table').DataTable()
 
-        
+
 
         $.fn.dataTable.ext.search.push(function(settings, data, dataIndex) {
-            kecamatan = $('#kecamatan').val();
+            let kecamatan = $('#kecamatan').val();
+            let tipeMarket = $('#tipeMarket').val();
             console.log(kecamatan);
-            if (kecamatan !== "") {
+            if (kecamatan !== "" || tipeMarket !== "") {
                 if (
-                    data[2] == kecamatan
+                    (data[2] == kecamatan && data[3] == tipeMarket) ||( data[2] == kecamatan  && tipeMarket == "") || (data[3] == tipeMarket && kecamatan == "")
                 ) {
                     return true;
                 } else {
@@ -222,6 +228,9 @@
         });
 
         $('#kecamatan').change(function() {
+            table.draw()
+        })
+        $('#tipeMarket').change(function() {
             table.draw()
         })
 

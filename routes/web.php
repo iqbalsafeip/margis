@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::put('/admin/profile/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::resource('/admin/user', UserController::class);
     Route::resource('/admin/market', MarketController::class);
+    Route::get('/admin/market/{id}/detail', [MarketController::class, 'detail'])->name('market.detail');
     Route::resource('/admin/officer', OfficerController::class);
     Route::resource('/admin/area', AreaController::class);
     Route::resource('/admin/fasilitas', FasilitasController::class);

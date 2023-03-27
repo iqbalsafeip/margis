@@ -43,9 +43,7 @@
                                                     {{ $kc->total }}
                                                 </div>
                                             </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-market fa-2x text-gray-300"></i>
-                                            </div>
+                                            
                                         </div>
                                     </div>
 
@@ -63,9 +61,7 @@
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">Total : {{ $total }}
                                         </div>
                                     </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-market fa-2x text-gray-300"></i>
-                                    </div>
+                                    
                                 </div>
                             </div>
 
@@ -94,9 +90,7 @@
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">Total : {{ $kc->total }}
                                             </div>
                                         </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-map fa-2x text-gray-300"></i>
-                                        </div>
+                                        
                                     </div>
                                     <button class="btn" type="button" data-toggle="collapse"
                                         data-target="#collapse-{{ $index }}" aria-expanded="false"

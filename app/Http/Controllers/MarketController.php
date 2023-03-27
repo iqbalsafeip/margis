@@ -21,6 +21,12 @@ class MarketController extends Controller
         $kecamatan = Kecamatan::all();
         return view('admin.market.index', compact('markets', 'kecamatan'));
     }
+    public function detail($id)
+    {
+        $market = DataMarket::findOrFail($id);
+        $kecamatan = Kecamatan::all();
+        return view('admin.market.detail', compact('market', 'kecamatan'));
+    }
     public function indexDosen()
     {
         $officers = Officer::all();
