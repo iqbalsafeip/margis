@@ -221,7 +221,7 @@
             <div class="top-right links">
                 @auth
                 @else
-                    <a href="{{ route('Login') }}">@lang('Login')</a>
+                    <a href="{{ route('login') }}">@lang('Login')</a>
 
 
                 @endauth
@@ -235,7 +235,7 @@
                 @else
                     <div
                         style="width: 100vw; height: 100vh; display: flex; flex-direction:column; justify-content: center; align-items: center;">
-                        <img width="200" height="200" class="mb-3" src="http://sigmarket.itg.ac.id/public/logo.png"
+                        <img width="200" height="200" class="mb-3" src="http://localhost:8000/logo.png"
                             alt="">
                         <h5>PEMERINTAH KABUPATEN GARUT</h5>
                         <h3>Dinas Penanaman Modal dan Pelayanan Terpadu Satu Pintu</h3>
