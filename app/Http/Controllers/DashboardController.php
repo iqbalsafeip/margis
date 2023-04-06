@@ -26,19 +26,5 @@ class DashboardController extends Controller
         // $tipe = $this->getTypeLabel($type);
         return view('dosen.dashboard.index', compact('rooms'));
     }
-    private function getTypeLabel($type)
-    {
-        switch ($type) {
-            case 'staff':
-                return "Staff";
-            case 'kelas':
-                return "Kelas";
-            case 'dosen':
-                return 'Dosen';
-            case 'lab':
-                return 'Labolatorium';
-            case 'lainnya':
-                return 'Lainnya';
-        }
-    }
+   
 }

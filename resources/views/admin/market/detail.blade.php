@@ -59,6 +59,7 @@
             </div>
         </div>
     </div>
+   
 </div>
 @endsection
 @section('skrip')
@@ -103,37 +104,37 @@
             switch (e.tipe_market) {
                 case "Alfamart":
                     iconOptions = {
-                        iconUrl: 'http://localhost:8000/img/alfamart.png',
+                        iconUrl: '{{URL::to("/")}}/img/alfamart.png',
                         iconSize: [80, 80]
                     };
                     break;
                 case "Indomaret":
                     iconOptions = {
-                        iconUrl: 'http://localhost:8000/img/indomaret.png',
+                        iconUrl: '{{URL::to("/")}}/img/indomaret.png',
                         iconSize: [80, 80]
                     };
                     break;
                 case "Yomart":
                     iconOptions = {
-                        iconUrl: 'http://localhost:8000/img/yomart.png',
+                        iconUrl: '{{URL::to("/")}}/img/yomart.png',
                         iconSize: [80, 80]
                     };
                     break;
                 case "Alfamidi":
                     iconOptions = {
-                        iconUrl: 'http://localhost:8000/img/alfamidi.png',
+                        iconUrl: '{{URL::to("/")}}/img/alfamidi.png',
                         iconSize: [80, 80]
                     };
                     break;
                 case "Lainnya":
                     iconOptions = {
-                        iconUrl: 'http://localhost:8000/img/lainnya.png',
+                        iconUrl: '{{URL::to("/")}}/img/lainnya.png',
                         iconSize: [80, 80]
                     };
                     break;
                 case "Indomart":
                     iconOptions = {
-                        iconUrl: 'http://localhost:8000/img/indomaret.png',
+                        iconUrl: '{{URL::to("/")}}/img/indomaret.png',
                         iconSize: [80, 80]
                     };
                     break;

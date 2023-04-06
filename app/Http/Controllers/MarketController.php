@@ -7,6 +7,7 @@ use App\Models\Kecamatan;
 use App\Models\Officer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 
 class MarketController extends Controller
 {
@@ -25,12 +26,19 @@ class MarketController extends Controller
     {
         $market = DataMarket::findOrFail($id);
         $kecamatan = Kecamatan::all();
+        // dd(URL::to('/'));
         return view('admin.market.detail', compact('market', 'kecamatan'));
     }
     public function indexDosen()
     {
         $officers = Officer::all();
         return view('dosen.officer.index', compact('officers'));
+    }
+
+    public function images($id){
+        $market = DataMarket::findOrFail($id);
+        $kecamatan = Kecamatan::all();
+        return view('admin.market.images', compact('market', 'kecamatan'));
     }
 
     /**

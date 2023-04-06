@@ -59,6 +59,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('/admin/user', UserController::class);
     Route::resource('/admin/market', MarketController::class);
     Route::get('/admin/market/{id}/detail', [MarketController::class, 'detail'])->name('market.detail');
+    Route::get('/admin/market/{id}/images', [MarketController::class, 'images'])->name('market.images');
     Route::resource('/admin/officer', OfficerController::class);
     Route::resource('/admin/area', AreaController::class);
     Route::resource('/admin/fasilitas', FasilitasController::class);

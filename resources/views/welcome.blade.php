@@ -400,7 +400,7 @@
                         gambar.map((gmbr, i) => {
                             listGambar.innerHTML += `
                             <div class="carousel-item ${i === 0 ? 'active' : null}">
-                                <img src="http://sigmarket.itg.ac.id/public/gambar/${gmbr.doc}" class="d-block w-100" alt="...">
+                                <img src="{{URL::to('/')}}/gambar/${gmbr.doc}" class="d-block w-100" alt="...">
                             </div>
                             `
                         })

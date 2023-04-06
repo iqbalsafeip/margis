@@ -15,35 +15,75 @@
             <form action="{{ route('market.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="foto" class="form-label">Upload foto petugas disini</label>
-                        <input class="form-control  @error('foto') is-invalid @enderror" type="file" name="foto">
-                        @if ($errors->has('foto'))
-                        <span class="text-danger">{{ $errors->first('foto') }}</span>
-                        @endif
-                    </div>
+
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control @error('nama_petugas') is-invalid @enderror" id="nama_petugas" name="nama_petugas" placeholder="nama_petugas">
-                        @if ($errors->has('nama_petugas'))
-                        <span class="text-danger">{{ $errors->first('nama_petugas') }}</span>
-                        @endif
-                        <label for="nama_petugas">Nama Petugas</label>
+                        <div class="form-group">
+                            <div class="form-label">Kecamatan</div>
+                            <select name="kecamatan" id="" class="form-select">
+                                <option value="">Pilih kecamatan</option>
+                                @foreach ($kecamatan as $kec)
+                                <option value="{{$kec->id}}">{{$kec->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control @error('no_hp') is-invalid @enderror" id="no_hp" name="no_hp" placeholder="no_hp">
-                        @if ($errors->has('no_hp'))
-                        <span class="text-danger">{{ $errors->first('no_hp') }}</span>
-                        @endif
-                        <label for="no_hp">Nomor Handphone</label>
+                        <div class="form-group">
+                            <div class="form-label">Nama Permohonan</div>
+                            <input type="text" name="nama_permohonan" placeholder="Nama Permohonan" class="form-control">
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="ktp" class="form-label">Upload foto KTP disini</label>
-                        <input class="form-control  @error('ktp') is-invalid @enderror" type="file" name="ktp">
-                        @if ($errors->has('ktp'))
-                        <span class="text-danger">{{ $errors->first('ktp') }}</span>
-                        @endif
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <div class="form-label">Nama Perusahaan</div>
+                            <input type="text" name="nama_perusahaan" placeholder="Nama Permohonan" class="form-control">
+                        </div>
                     </div>
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <div class="form-label">Alamat</div>
+                            <input type="text" name="alamat" placeholder="Nama Permohonan" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <div class="form-label">Nomor Izin</div>
+                            <input type="text" name="nomor_izin" placeholder="Nama Permohonan" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <div class="form-label">Tanggal Izin</div>
+                            <input type="text" name="tanggal_izin" placeholder="Nama Permohonan" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <div class="form-label">Tipe Market</div>
+                            <select name="" id="tipeMarket" class="form-select">
+                                <option value="">Pilih Tipe Market</option>
+                                <option value="Alfamart">Alfamart</option>
+                                <option value="Indomaret">Indomaret</option>
+                                <option value="Yomart">Yomart</option>
+                                <option value="Alfamidi">Alfamidi</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <div class="form-label">Longitude</div>
+                            <input type="text" name="longitude" placeholder="Nama Permohonan" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <div class="form-group">
+                            <div class="form-label">Latitude</div>
+                            <input type="text" name="latitude" placeholder="Nama Permohonan" class="form-control">
+                        </div>
+                    </div>
+                  
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
@@ -65,7 +105,7 @@
         <select name="" id="tipeMarket" class="form-select">
             <option value="">Pilih Tipe Market</option>
             <option value="Alfamart">Alfamart</option>
-            <option value="Indomart">Indomart</option>
+            <option value="Indomaret">Indomaret</option>
             <option value="Yomart">Yomart</option>
             <option value="Alfamidi">Alfamidi</option>
             <option value="Lainnya">Lainnya</option>
@@ -96,11 +136,13 @@
                 <td>{{ $market->tipe_market }}</td>
 
                 <td class="text-center">
-                    
+
+                    <a href="{{route('market.images', $market->id)}}"  class="btn edit" style="color: rgb(128, 87, 223)">
+                    <i class="bi bi-images"></i></a>|
                     <a href="{{ route('market.edit', $market->id) }}/edit}}" data-bs-toggle="modal" data-bs-target="#editModal{{ $market['id'] }}" class="btn edit" style="color: rgb(128, 87, 223)">
                         <i class="bi bi-pencil-fill"></i></a>|
-                    <a href="{{route('market.detail', $market->id)}}"  class="btn " style="color: black">
-                    <i class="bi bi-map"></i></a>|
+                    <a href="{{route('market.detail', $market->id)}}" class="btn " style="color: black">
+                        <i class="bi bi-map"></i></a>|
                     <!-- Start Edit user Modal -->
                     <div class="modal fade" style="left: 0px" id="editModal{{ $market['id'] }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
@@ -213,7 +255,7 @@
             console.log(kecamatan);
             if (kecamatan !== "" || tipeMarket !== "") {
                 if (
-                    (data[2] == kecamatan && data[3] == tipeMarket) ||( data[2] == kecamatan  && tipeMarket == "") || (data[3] == tipeMarket && kecamatan == "")
+                    (data[2] == kecamatan && data[3] == tipeMarket) || (data[2] == kecamatan && tipeMarket == "") || (data[3] == tipeMarket && kecamatan == "")
                 ) {
                     return true;
                 } else {

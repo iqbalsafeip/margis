@@ -37,7 +37,7 @@
                 <div class="card bg-light border-0 text-center w-75 h-100">
                     <div class="card-body">
                         <h5 style="font-size: 45px;" class="text-muted mt-3 mb-3">
-                            <strong>Data Masih Kosong Nich!</strong>
+                            <strong>Data Masih Kosong </strong>
                         </h5>
                     </div>
                 </div>
