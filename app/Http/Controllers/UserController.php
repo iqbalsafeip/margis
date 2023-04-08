@@ -42,14 +42,13 @@ class UserController extends Controller
             'username' => 'required|unique:users',
             'email' => 'required|unique:users',
             'password' => 'required',
-            'role' => 'required|in:admin,dosen'
         ]);
         // dd($request);
         $user = new User();
         $user->username = $request->username;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
-        $user->role = $request->role;
+        $user->role = 'admin';
         $user->save();
         return redirect()->route('user.index')->with('toast_success', 'Pengguna Berhasil Ditambahkan');
     }

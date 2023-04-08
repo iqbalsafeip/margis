@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\ImportMarket;
 use App\Models\DataMarket;
+use App\Models\ImageMarket;
 use App\Models\Kecamatan;
 use App\Models\Officer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MarketController extends Controller
 {
@@ -35,11 +38,46 @@ class MarketController extends Controller
         return view('dosen.officer.index', compact('officers'));
     }
 
-    public function images($id){
+    public function images($id)
+    {
         $market = DataMarket::findOrFail($id);
         $kecamatan = Kecamatan::all();
         return view('admin.market.images', compact('market', 'kecamatan'));
     }
+
+
+    public function addImages($id, Request $request)
+    {
+        $index = 0;
+        if ($request->gambar) {
+
+            foreach ($request->gambar as $file) {
+                $image = new ImageMarket();
+                $image->id_market = $id;
+                $ext = $file->getClientOriginalExtension();
+                $imageName = time() . '.ID-' . $index . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('gambar'), $imageName);
+                $image->doc = $imageName;
+                $image->save();
+                $index++;
+            }
+        }
+        return back();
+    }
+
+    public function exports()
+    {
+        return Excel::download(new ImportMarket, 'market.xlsx');
+    }
+
+    public function deleteImage($id)
+    {
+        $image = ImageMarket::findOrFail($id);
+        $image->delete();
+
+        return back();
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -4,7 +4,7 @@
 <div class="row mt-4">
 
     <div class="col-8">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Tambah Gambar
         </button>
         <div class="card">
@@ -18,24 +18,31 @@
 
 
             <div class="card-body">
-                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner">
-                        @foreach ($market->gambar as $i => $g)
-                        <div class="carousel-item {{ $i === 0 ? 'active' : null }}">
-                            <img src="{{URL::to('/')}}/gambar/{{ $g->doc }}" class="d-block w-100" alt="...">
-                        </div>
-                        @endforeach
+                <div class="row">
+                    @foreach ($market->gambar as $i => $g)
+                    <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+                    <!-- <div class="carousel-item {{ $i === 0 ? 'active' : null }}"> -->
+                    <!-- <button class="btn btn-danger" style="z-index: 999; ">hapus</button> -->
 
+                    <img src="{{URL::to('/')}}/gambar/{{ $g->doc }}" class="w-100 shadow-1-strong rounded mb-4" alt="...">
+                    <!-- </div> -->
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                    @endforeach
+                </div>
+                <!-- <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"> -->
+                <!-- <div class="carousel-inner"> -->
+
+
+                <!-- </div> -->
+                <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+                    </button> -->
+                <!-- </div> -->
             </div>
         </div>
     </div>
@@ -89,11 +96,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{route('market.addImage', $market->id)}}">
+                    <form action="{{route('market.addImage', $market->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
+                        @method('POST')
                         <label for="files" class="form-label">Select files:</label>
-                        <input type="file" id="files" name="files" class="form-control" multiple>
+                        <input type="file" id="files" required name="gambar[]" class="form-control" multiple>
                         <button type="submit" class="btn btn-primary">Upload</button>
 
                     </form>

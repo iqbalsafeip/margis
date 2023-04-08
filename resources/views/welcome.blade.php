@@ -11,6 +11,7 @@
     <link href="/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="/css/styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     @yield('meta')
 
     @stack('before-styles')
@@ -213,7 +214,7 @@
             </div>
         </div>
         <button class="float" id="btn-route">
-            <i class="fa fa-plus my-float"></i>
+        <i class="bi bi-geo" style="font-size: 2rem; "></i>
         </button>
         <div id="map" style="width: 100vw; height: 100vh; position: absolute; top: 0px; left: 0px;"></div>
     @else
@@ -275,12 +276,15 @@
 
         btnRoute.addEventListener('click', function() {
             isEdit = !isEdit
+            btnRoute.innerHTML = '<i class="bi bi-x-circle-fill" style="font-size: 2rem; "></i>'
             if (!isEdit) {
+
                 dataRoute = [];
                 if (route) {
                     route.setWaypoints([])
                     route.show = false
                 }
+                btnRoute.innerHTML = '<i class="bi bi-geo" style="font-size: 2rem; "></i>'
 
             }
         })

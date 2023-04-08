@@ -2,9 +2,15 @@
 @section('content')
 <h1 class="mt-4">Daftar Market</h1>
 <hr class="my-0">
-<button type="button" class="btn btn-primary btn-md mb-3 mt-3" data-bs-toggle="modal" data-bs-target="#addModal">
-    + Tambah Market
-</button>
+<div class="d-flex flex-row">
+
+    <button type="button" class=" btn btn-primary btn-md mb-3 mt-3" data-bs-toggle="modal" data-bs-target="#addModal">
+        + Tambah Market
+    </button>
+    <a href="{{route('exports')}}" class="ms-2 btn btn-primary btn-md mb-3 mt-3"  >
+        Export Data
+    </a>
+</div>
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="border-radius: 10px">
@@ -83,7 +89,7 @@
                             <input type="text" name="latitude" placeholder="Nama Permohonan" class="form-control">
                         </div>
                     </div>
-                  
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>
@@ -137,8 +143,8 @@
 
                 <td class="text-center">
 
-                    <a href="{{route('market.images', $market->id)}}"  class="btn edit" style="color: rgb(128, 87, 223)">
-                    <i class="bi bi-images"></i></a>|
+                    <a href="{{route('market.images', $market->id)}}" class="btn edit" style="color: rgb(128, 87, 223)">
+                        <i class="bi bi-images"></i></a>|
                     <a href="{{ route('market.edit', $market->id) }}/edit}}" data-bs-toggle="modal" data-bs-target="#editModal{{ $market['id'] }}" class="btn edit" style="color: rgb(128, 87, 223)">
                         <i class="bi bi-pencil-fill"></i></a>|
                     <a href="{{route('market.detail', $market->id)}}" class="btn " style="color: black">
@@ -156,37 +162,74 @@
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-body">
-                                        <div class="mb-3 text-start">
-                                            <label for="foto" class="form-label">Upload foto petugas
-                                                disini</label>
-                                            <input class="form-control  @error('foto') is-invalid @enderror" type="file" name="foto">
-                                            @if ($errors->has('foto'))
-                                            <span class="text-danger">{{ $errors->first('foto') }}</span>
-                                            @endif
-                                        </div>
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control @error('nama_petugas') is-invalid @enderror" id="nama_petugas" name="nama_petugas" placeholder="nama_petugas" value="{{ old('nama_petugas', $market->nama_petugas) }}">
-                                            @if ($errors->has('nama_petugas'))
-                                            <span class="text-danger">{{ $errors->first('nama_petugas') }}</span>
-                                            @endif
-                                            <label for="nama_petugas">Nama Petugas</label>
+                                            <div class="form-group">
+                                                <div class="form-label">Kecamatan</div>
+                                                <select name="kecamatan" selected="{{$market->kecamatan}}" id="" class="form-select">
+                                                    <option value="">Pilih kecamatan</option>
+                                                    @foreach ($kecamatan as $kec)
+                                                    <option value="{{$kec->id}}" {{$market->kecamatan->id == $kec->id ? "selected" : ""}} >{{$kec->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
 
                                         <div class="form-floating mb-3">
-                                            <input type="text" class="form-control @error('no_hp') is-invalid @enderror" id="no_hp" name="no_hp" placeholder="no_hp" value="{{ old('no_hp', $market->no_hp) }}">
-                                            @if ($errors->has('no_hp'))
-                                            <span class="text-danger">{{ $errors->first('no_hp') }}</span>
-                                            @endif
-                                            <label for="no_hp">Nomor Handphone</label>
+                                            <div class="form-group">
+                                                <div class="form-label">Nama Permohonan</div>
+                                                <input type="text" name="nama_permohonan" value="{{$market->nama_permohonan}}" placeholder="Nama Permohonan" class="form-control">
+                                            </div>
                                         </div>
-                                        <div class="mb-3 text-start">
-                                            <label for="ktp" class="form-label">Upload foto KTP
-                                                disini</label>
-                                            <input class="form-control  @error('ktp') is-invalid @enderror" type="file" name="ktp">
-                                            @if ($errors->has('ktp'))
-                                            <span class="text-danger">{{ $errors->first('ktp') }}</span>
-                                            @endif
+                                        <div class="form-floating mb-3">
+                                            <div class="form-group">
+                                                <div class="form-label">Nama Perusahaan</div>
+                                                <input type="text" name="nama_perusahaan" value="{{$market->nama_perusahaan}}" placeholder="Nama Permohonan" class="form-control">
+                                            </div>
                                         </div>
+                                        <div class="form-floating mb-3">
+                                            <div class="form-group">
+                                                <div class="form-label">Alamat</div>
+                                                <input type="text" name="alamat" value="{{$market->alamat}}" placeholder="Nama Permohonan" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <div class="form-group">
+                                                <div class="form-label">Nomor Izin</div>
+                                                <input type="text" name="nomor_izin" value="{{$market->nomor_izin}}" placeholder="Nama Permohonan" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <div class="form-group">
+                                                <div class="form-label">Tanggal Izin</div>
+                                                <input type="text" name="tanggal_izin" value="{{$market->tanggal_izin}}" placeholder="Nama Permohonan" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <div class="form-group">
+                                                <div class="form-label">Tipe Market</div>
+                                                <select name="" id="tipeMarket"  class="form-select">
+                                                    <option value="">Pilih Tipe Market</option>
+                                                    <option value="Alfamart">Alfamart</option>
+                                                    <option value="Indomaret">Indomaret</option>
+                                                    <option value="Yomart">Yomart</option>
+                                                    <option value="Alfamidi">Alfamidi</option>
+                                                    <option value="Lainnya">Lainnya</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <div class="form-group">
+                                                <div class="form-label">Longitude</div>
+                                                <input type="text" name="longitude" value="{{$market->longitude}}" placeholder="Nama Permohonan" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <div class="form-group">
+                                                <div class="form-label">Latitude</div>
+                                                <input type="text" name="latitude" value="{{$market->latitude}}" placeholder="Nama Permohonan" class="form-control">
+                                            </div>
+                                        </div>
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Batal</button>

@@ -1,17 +1,11 @@
 <?php
 
-use App\Http\Controllers\AreaController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\FasilitasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MarketController;
 use App\Http\Controllers\OfficerController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ReportController;
-use App\Http\Controllers\RoomController;
-use App\Http\Controllers\ScheduleController;
-use App\Http\Controllers\SopController;
 use App\Http\Controllers\UserController;
 use App\Models\DataMarket;
 use App\Models\Kecamatan;
@@ -60,33 +54,11 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('/admin/market', MarketController::class);
     Route::get('/admin/market/{id}/detail', [MarketController::class, 'detail'])->name('market.detail');
     Route::get('/admin/market/{id}/images', [MarketController::class, 'images'])->name('market.images');
+    Route::post('/admin/market/{id}/images', [MarketController::class, 'addImages'])->name('market.addImage');
     Route::resource('/admin/officer', OfficerController::class);
-    Route::resource('/admin/area', AreaController::class);
-    Route::resource('/admin/fasilitas', FasilitasController::class);
-    Route::resource('/admin/schedules', ScheduleController::class);
-    Route::resource('/admin/sop', SopController::class);
     Route::get('/admin/dashboard', [DashboardController::class, 'dashboardAdmin'])->name('dashboardAdmin');
-    Route::get('/admin/dashboard/rooms/{rooms:type}', [RoomController::class, 'index']);
-    Route::post('/admin/dashboard/rooms', [RoomController::class, 'store'])->name('store');
-    Route::post('/admin/dashboard/rooms/{id}/edit', [RoomController::class, 'edit'])->name('edit');
-    Route::post('/admin/dashboard/rooms/update', [RoomController::class, 'update'])->name('update');
-    Route::delete('/admin/dashboard/rooms/{id}', [RoomController::class, 'destroy'])->name('destroy');
-    Route::resource('/admin/report', ReportController::class);
-    Route::get('laporan', [ReportController::class, 'laporan'])->name('laporan');
-    Route::post('media', [ReportController::class, 'media'])->name('media');
+    
+    Route::get('export', [MarketController::class, 'exports'])->name('exports');
     // Route::post('/admin/officer', [OfficerController::class, 'store'])->name('store');
 });
 
-Route::group(['middleware' => ['auth', 'role:dosen']], function () {
-    Route::get('/dosen/dashboard', function () {
-        return view('dosen.dashboard.index');
-    });
-
-    Route::get('/dosen/dashboard', [DashboardController::class, 'dashboarddosen']);
-    Route::get('/dosen/dashboard/rooms/{rooms:type}', [RoomController::class, 'indexDosen']);
-    Route::get('/dosen/sop', [SopController::class, 'indexDosen']);
-    Route::get('/dosen/schedules', [ScheduleController::class, 'indexDosen']);
-    Route::get('/dosen/report', [ReportController::class, 'indexDosen']);
-    Route::get('/dosen/officer', [OfficerController::class, 'indexDosen']);
-    Route::get('main', [ReportController::class, 'mainDosen'])->name('mainDosen');
-});

@@ -31,18 +31,7 @@
                             @endif
                             <label for="email">Email</label>
                         </div>
-                        <div class="radio">Pilih role <br>
-                            <input class="form-check-input" type="radio" name="role" id="admin" value="admin"
-                                checked>
-                            <label class="form-check-label" for="admin">
-                                admin
-                            </label>
-                            <input class="form-check-input" type="radio" name="role" id="dosen" value="dosen"
-                                checked>
-                            <label class="form-check-label" for="dosen">
-                                user
-                            </label>
-                        </div>
+                        
                         <div class="form-floating">
                             <input type="password" class="form-control" id="password" name="password"
                                 placeholder="Password">
@@ -73,7 +62,6 @@
                         $no = 1;
                     @endphp
                     @foreach ($users as $user)
-                        @if ($user->role != 'admin')
                             <tr>
                                 <th scope="row">{{ $no++ }}</th>
                                 <td>{{ $user->username }}</td>
@@ -111,24 +99,7 @@
                                                                 value="{{ old('email', $user->email) }}">
                                                             <label for="email">Email</label>
                                                         </div>
-                                                        <div class="text-start">
-                                                            <div class="mb-3">
-                                                                <div class="radio">Pilih role <br>
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="role" id="admin" value="admin"
-                                                                        checked>
-                                                                    <label class="form-check-label" for="admin">
-                                                                        admin
-                                                                    </label>
-                                                                    <input class="form-check-input" type="radio"
-                                                                        name="role" id="dosen" value="dosen"
-                                                                        checked>
-                                                                    <label class="form-check-label" for="dosen">
-                                                                        dosen
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        
                                                         <div class="form-floating pb-3">
                                                             <input type="password" class="form-control"
                                                                 style="border-radius: 10px" name="password"
@@ -173,7 +144,6 @@
                                     </div>
                                 </td>
                             </tr>
-                        @endif
                     @endforeach
                 </tbody>
             </table>

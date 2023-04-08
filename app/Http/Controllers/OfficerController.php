@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kecamatan;
 use App\Models\Officer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -16,7 +17,8 @@ class OfficerController extends Controller
     public function index()
     {
         $officers = Officer::all();
-        return view('admin.officer.index', compact('officers'));
+        $kecamatan = Kecamatan::all();
+        return view('admin.officer.index', compact('officers', 'kecamatan'));
     }
     public function indexDosen()
     {
