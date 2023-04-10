@@ -19,25 +19,6 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('password'),
             'role' => 'admin',
-
-        ]);
-        User::create([
-            'username' => 'dosen1',
-            'email' => 'dosen1@gmail.com',
-            'password' => bcrypt('password'),
-            'role' => 'dosen',
-        ]);
-        User::create([
-            'username' => 'dosen2',
-            'email' => 'dosen2@gmail.com',
-            'password' => bcrypt('password'),
-            'role' => 'dosen',
-        ]);
-        User::create([
-            'username' => 'dosen3',
-            'email' => 'dosen3@gmail.com',
-            'password' => bcrypt('password'),
-            'role' => 'dosen',
         ]);
     }
 }

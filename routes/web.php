@@ -24,7 +24,6 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function (Request $request) {
-    dd(Auth::check());
     $market = DataMarket::with('kecamatan', 'gambar');
     if ($request->get('tipe_market')) {
         $market->where('tipe_market', $request->get('tipe_market'));
