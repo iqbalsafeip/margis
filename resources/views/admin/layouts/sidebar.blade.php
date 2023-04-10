@@ -9,10 +9,10 @@
             <div class="sb-nav-link-icon"><i class="bi bi-check2-all"></i></div>
                 Data Market
             </a>
-            <a class="nav-link {{ Request::is('admin/officer*') ? 'active' : '' }}" href="/admin/officer">
+            <!-- <a class="nav-link {{ Request::is('admin/officer*') ? 'active' : '' }}" href="/admin/officer">
                 <div class="sb-nav-link-icon"><i class="bi bi-person-badge-fill"></i></div>
                 Data Kecamatan
-            </a>
+            </a> -->
             <a class="nav-link {{ Request::is('admin/user*') ? 'active' : '' }}" href="/admin/user">
             <div class="sb-nav-link-icon"><i class="bi bi-person-plus"></i></div>
                 Pengguna

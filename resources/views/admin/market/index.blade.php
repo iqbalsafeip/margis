@@ -25,7 +25,7 @@
                     <div class="form-floating mb-3">
                         <div class="form-group">
                             <div class="form-label">Kecamatan</div>
-                            <select name="kecamatan" id="" class="form-select">
+                            <select name="id_kecamatan" id="" class="form-select">
                                 <option value="">Pilih kecamatan</option>
                                 @foreach ($kecamatan as $kec)
                                 <option value="{{$kec->id}}">{{$kec->name}}</option>
@@ -67,7 +67,7 @@
                     <div class="form-floating mb-3">
                         <div class="form-group">
                             <div class="form-label">Tipe Market</div>
-                            <select name="" id="tipeMarket" class="form-select">
+                            <select name="tipe_market"  class="form-select">
                                 <option value="">Pilih Tipe Market</option>
                                 <option value="Alfamart">Alfamart</option>
                                 <option value="Indomaret">Indomaret</option>
@@ -252,8 +252,7 @@
                                     @method('DELETE')
                                     <div class="modal-body mt-3">
                                         <div class="mb-3">
-                                            <h5>Apakah anda yakin menghapus petugas
-                                                {{ $market->nama_petugas }} ?
+                                            <h5>Apakah anda yakin menghapus market
                                             </h5>
                                         </div>
                                     </div>

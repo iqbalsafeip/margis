@@ -62,7 +62,7 @@ class MarketController extends Controller
                 $index++;
             }
         }
-        return back();
+        return back()->with('toast_success', 'berhasil menambahkan gamabar');;
     }
 
     public function exports()
@@ -97,23 +97,17 @@ class MarketController extends Controller
      */
     public function store(Request $request)
     {
-
-        // dd($request);
-        $data = $request->validate([
-            'nama_petugas' => 'string',
-            'no_hp' => 'string',
-            'foto' => 'image',
-            'ktp' => 'image',
-        ]);
-
-        if ($request->file('foto')) {
-            $data['foto'] = $request->file('foto')->store('foto-petugas');
+        $data = $request->all();
+        $market = new DataMarket();
+        foreach($data as $d => $f){
+            if($d != '_token'){
+                $market->$d = $f;
+            }
         }
-        if ($request->file('ktp')) {
-            $data['ktp'] = $request->file('ktp')->store('ktp-petugas');
-        }
-        Officer::create($data);
-        return redirect()->route('officer.index')->with('toast_success', 'Petugas berhasil ditambahkan');
+
+        $market->save();
+
+        return back()->with('toast_success', 'Petugas berhasil ditambahkan');
     }
 
     /**
@@ -176,9 +170,11 @@ class MarketController extends Controller
      * @param  \App\Models\Officer  $officer
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Officer $officer)
+    public function destroy($id)
     {
-        $officer->delete();
-        return back()->with('toast_success', 'Petugas berhasil dihapus');
+        $market = DataMarket::findOrFail($id);
+
+        $market->delete();
+        return back()->with('toast_success', 'market berhasil dihapus');
     }
 }
