@@ -10,6 +10,8 @@ use App\Http\Controllers\UserController;
 use App\Models\DataMarket;
 use App\Models\Kecamatan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +24,7 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function (Request $request) {
+    dd(Auth::check());
     $market = DataMarket::with('kecamatan', 'gambar');
     if ($request->get('tipe_market')) {
         $market->where('tipe_market', $request->get('tipe_market'));
@@ -37,7 +40,7 @@ Route::get('/', function (Request $request) {
     $kecamatan = Kecamatan::all();
 
     return view('welcome', compact('market', 'kecamatan', 'id_kecamatan'));
-})->name('main');
+})->middleware('auth')->name('main');
 Route::get('/login', function () {
     return view('login.index');
 })->name('login');
